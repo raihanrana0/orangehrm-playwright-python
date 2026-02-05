@@ -1,30 +1,31 @@
-name: Orange HRM Playwright-Python CI
+name: Playwright CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install playwright pytest
-          playwright install chromium
+          pip install -r requirements.txt
+          playwright install --with-deps
 
-      - name: Run tests
-        run: |
-          pytest
+      - name: Run UI tests
+        run: pytest tests/ui
+
+      - name: Run API tests
+        run: pytest tests/api
