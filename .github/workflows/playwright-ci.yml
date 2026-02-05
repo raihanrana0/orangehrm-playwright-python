@@ -24,8 +24,9 @@ jobs:
           pip install -r requirements.txt
           playwright install --with-deps
 
-      - name: Run UI tests
-        run: pytest tests/ui
-
-      - name: Run API tests
-        run: pytest tests/api
+      - name: Run Playwright tests
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0  # install browsers locally
+        run: |
+          pytest tests/ui
+          pytest tests/api
