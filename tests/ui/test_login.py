@@ -1,7 +1,7 @@
-from playwright.sync_api import expect, Any
+from playwright.sync_api import expect
 from pages.login_page import LoginPage
 
-def test_login_with_valid_credentials(page: Any):
+def test_login_with_valid_credentials(page):
     login = LoginPage(page)
     login.open()
     login.login("Admin", "admin123")
@@ -9,14 +9,14 @@ def test_login_with_valid_credentials(page: Any):
     page.wait_for_url("**/dashboard/*")
     assert "/dashboard" in page.url
 
-def test_login_with_empty_fields(page: Any):
+def test_login_with_empty_fields(page):
     login = LoginPage(page)
     login.open()
     login.login("", "")
 
     expect(login.required_error).to_have_count(2)
 
-def test_login_with_wrong_credentials(page: Any):
+def test_login_with_wrong_credentials(page):
     login = LoginPage(page)
 
     login.open()
