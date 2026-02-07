@@ -1,4 +1,4 @@
-name: Playwright Python Tests
+name: OrangeHRM Playwright Python Tests
 
 on:
   push:
