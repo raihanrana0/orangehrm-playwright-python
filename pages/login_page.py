@@ -9,6 +9,7 @@ class LoginPage:
         self.password = page.locator("input[name='password']")
         self.login_btn = page.locator("button[type='submit']")
         self.required_error = page.locator(".oxd-input-field-error-message")
+        self.invalid_credentials_message = page.locator(".oxd-alert-content-text")
 
     def open(self):
         self.page.goto(self.URL)

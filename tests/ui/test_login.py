@@ -6,7 +6,8 @@ def test_login_with_valid_credentials(page: Any):
     login.open()
     login.login("Admin", "admin123")
 
-    expect(page).to_have_url_containing("/dashboard")
+    page.wait_for_url("**/dashboard/*")
+    assert "/dashboard" in page.url
 
 def test_login_with_empty_fields(page: Any):
     login = LoginPage(page)
