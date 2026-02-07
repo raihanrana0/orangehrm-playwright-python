@@ -1,21 +1,19 @@
 from playwright.sync_api import Page
 
 class LoginPage:
+    URL = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+
     def __init__(self, page: Page):
         self.page = page
-
         self.username = page.locator("input[name='username']")
         self.password = page.locator("input[name='password']")
-        self.login_button = page.locator("button[type='submit']")
-        self.required_messages = page.locator("span.oxd-input-field-error-message")
-        self.invalid_credentials_message = page.locator(".oxd-alert-content-text")
-
+        self.login_btn = page.locator("button[type='submit']")
+        self.required_error = page.locator(".oxd-input-field-error-message")
 
     def open(self):
-        self.page.goto("https://opensource-demo.orangehrmlive.com/")
+        self.page.goto(self.URL)
 
-    def login(self, user: str, password: str):
-        self.username.fill(user)
+    def login(self, username: str, password: str):
+        self.username.fill(username)
         self.password.fill(password)
-
-        self.login_button.click()
+        self.login_btn.click()

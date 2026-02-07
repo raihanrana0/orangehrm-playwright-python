@@ -1,5 +1,3 @@
-playwright
 pytest
+playwright
 pytest-playwright
-requests
-pytest-html
