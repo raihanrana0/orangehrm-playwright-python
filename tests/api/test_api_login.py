@@ -1,8 +1,22 @@
+import pytest
 from utils.api_client import OrangeHRMApiClient
 
-def test_login_page_api_status():
+@pytest.mark.parametrize(
+    "fetch_method",
+    [
+        "get_base_page",
+        "get_login_page",
+    ],
+)
+def test_api_page_status(fetch_method):
     api = OrangeHRMApiClient()
-    response = api.get_login_page()
+    response = getattr(api, fetch_method)()
 
     assert response.status_code == 200
     assert "OrangeHRM" in response.text
+
+def test_login_page_has_login_path():
+    api = OrangeHRMApiClient()
+    response = api.get_login_page()
+
+    assert api.login_path in response.url
